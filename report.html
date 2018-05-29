@@ -13241,7 +13241,9 @@ Faces detcted in 11.00% of the sample dog dataset.
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Question 2:</strong> This algorithmic choice necessitates that we communicate to the user that we accept human images only when they provide a clear view of a face (otherwise, we risk having unneccessarily frustrated users!). In your opinion, is this a reasonable expectation to pose on the user? If not, can you think of a way to detect humans in images that does not necessitate an image with a clearly presented face?</p>
 <p><strong>Answer:</strong></p>
-<p>The expectation that the user should provide a clear view of his/her face is not reasonable. It would have been reasonable a few  years ago but today we can use a CNN based solution to do the job of face detection way better.</p>
+<p>The expectation that the user should provide a clear view of his/her face is not reasonable because by doing so, we add a limitation in our algorithm, where profile,unclear images of faces might get miss-classified. This may make the Haar cascading  algorithm unreliable in real world situations where conditions are not ideal. Also, since Haar cascading relies so heavily on edge detection to perform its function, it will not work properly when the lighting is not adequate or when the color of the face matches with the color of the background. There are other Face detection algorithms like LBP Cascade(local binary patterns)
+but, I will suggest using a CNN based solution because we know that a well trained CNN will yeild better results than the before mentioned algorithms.</p>
+<p>CNN work way better when it comes to working with images because CNN's, by design, are built to recognize patterns, the more layers the neural network will have the more complex patterns it will start to recognize.</p>
 
 </div>
 </div>
@@ -14222,6 +14224,9 @@ test_{network} = bottleneck_features['test']</code></pre>
 </code></pre>
 <p><strong>Question 5:</strong> Outline the steps you took to get to your final CNN architecture and your reasoning at each step.  Describe why you think the architecture is suitable for the current problem.</p>
 <p><strong>Answer:</strong></p>
+<p>As we have seen, training a model from scratch is not a practical choice. So now, we will try our hand at transfer learning. We have already tried transfer leraning on the VGG16 model and it gave us an accuracy of 50%. That clearly showed that the transfer learning approach will yeild better results for us.</p>
+<p>Now we will try to improve the results by using a better model. I have chosen Inception because it has been trained on the Imagenet dataset that has 1000 classes and thousands of images. It will clearly give us an edge over all the previous models that we have tried.</p>
+<p><strong>STEPS:-</strong></p>
 <p>• Used GlobalAveragePooling to flatten the features into vectors so that the next dense layer could work.<br>
 • Added two Dense/fully connected layers for training.<br>
 • Used Dropout as it helps in dealing with overfitting.<br>
